@@ -13,37 +13,73 @@ public class FizzBuzzMultithreaded {
         this.n = n;
     }
 
-    public void fizz() throws InterruptedException, BrokenBarrierException {
+    public void fizz() {
         for (int i = 1; i <= n; i++) {
             if (i % 3 == 0 && i % 5 != 0) {
-                queue.put("fizz");
+                try {
+                    queue.put("fizz");
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
-            barrier.await();
+            try {
+                barrier.await();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (BrokenBarrierException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
-    public void buzz() throws InterruptedException, BrokenBarrierException {
+    public void buzz()  {
         for (int i = 1; i <= n; i++) {
             if (i % 5 == 0 && i % 3 != 0) {
-                queue.put("buzz");
+                try {
+                    queue.put("buzz");
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
-            barrier.await();
+            try {
+                barrier.await();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (BrokenBarrierException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
-    public void fizzbuzz() throws InterruptedException, BrokenBarrierException {
+    public void fizzbuzz() {
         for (int i = 1; i <= n; i++) {
 
             if (i % 3 == 0 && i % 5 == 0) {
-                queue.put("fizzbuzz");
+                try {
+                    queue.put("fizzbuzz");
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
-            barrier.await();
+            try {
+                barrier.await();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (BrokenBarrierException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
-    public void number() throws InterruptedException, BrokenBarrierException {
+    public void number()  {
         for (int i = 1; i <= n; i++) {
-            barrier.await();
+            try {
+                barrier.await();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (BrokenBarrierException e) {
+                throw new RuntimeException(e);
+            }
             String output = queue.poll();
             if (output == null) {
                 output = String.valueOf(i);
